@@ -3,5 +3,5 @@ class Game{
   String word;
   int lives;
 
-  Game(this.word, this.lives);
+  Game({required this.word, required this.lives});
 }

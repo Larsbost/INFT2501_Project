@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ClickOnCharButton extends StatelessWidget {
-  
+
   final String char;
   final bool isChoose;
   final bool isContainsInWord;
