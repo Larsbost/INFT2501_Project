@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inft2501_prosjekt/pages/hangman_game.dart';
+import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
 
-class Home extends StatefulWidget {
-
+class MainMenu extends StatefulWidget {
   @override
-  State<Home> createState() => _HomeState();
+  State<MainMenu> createState() => _MainMenuState();
 }
 
-class _HomeState extends State<Home> {
-  List<bool> _selections = List.generate(2, (_) => false);
+class _MainMenuState extends State<MainMenu> {
+  final List<bool> _selections = List.generate(2, (_) => false);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey[700],
-            automaticallyImplyLeading: false,
-        ),
-
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey[700],
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,24 +40,19 @@ class _HomeState extends State<Home> {
                   textStyle: const TextStyle(
                       fontSize: 24, fontStyle: FontStyle.italic)),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Hangman())
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Hangman()));
               },
             ),
             const SizedBox(height: 20.0),
-             ToggleButtons(
-                children: const <Widget>[
-                  Text("NO"),
-                  Text("EN")
-                ],
+            ToggleButtons(
+                children: const <Widget>[Text("NO"), Text("EN")],
                 isSelected: _selections,
                 onPressed: (int index) {
                   setState(() {
                     _selections[index] = !_selections[index];
                   });
-            }),
+                }),
             TextButton.icon(
               label: const Text('Informasjon'),
               icon: const Icon(Icons.info),
@@ -69,7 +63,10 @@ class _HomeState extends State<Home> {
                   textStyle: const TextStyle(
                       fontSize: 24, fontStyle: FontStyle.italic)),
               onPressed: () {
-                //TODO route til informasjons skriv
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => pop_up_dialog(context),
+                );
               },
             ),
           ],

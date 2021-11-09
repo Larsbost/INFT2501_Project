@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inft2501_prosjekt/pages/home.dart';
+import 'package:inft2501_prosjekt/pages/main_menu.dart';
 import 'package:inft2501_prosjekt/pages/hangman_game.dart';
 
 
@@ -16,7 +16,7 @@ class Hangman extends StatelessWidget {
     return MaterialApp(
       initialRoute: "/home",
       routes: {
-        '/home' : (context) => Home(),
+        '/home' : (context) => MainMenu(),
         '/hangman' : (context) =>  Hangman()
       },
     );
