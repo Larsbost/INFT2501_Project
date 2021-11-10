@@ -1,6 +1,26 @@
 {
-  "helloWorld": "Hello World!",
-  "@helloWorld": {
-    "description": "The conventional newborn programmer greeting"
+  "info": "The game is called hangman. I cant be asked to write more",
+  "@info": {
+    "description": "Info about the game"
+  },
+
+  "closeButton": "Close",
+  "@closeButton": {
+    "description": "Info about the game"
+  },
+
+  "infoHeadLine": "How to play?",
+  "@infoHeadLine": {
+    "description": "Info about the game"
+  },
+
+  "playButton": "Play!",
+  "@playButton": {
+    "description": "Info about the game"
+  },
+
+  "infoButton": "Information",
+  "@infoButton": {
+    "description": "Info about the game"
   }
 }

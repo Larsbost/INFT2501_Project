@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget pop_up_dialog(BuildContext context) {
+  var lang = AppLocalizations.of(context);
   return AlertDialog(
+
     backgroundColor: Colors.white70,
-    title: const Text('Hvordan spille?'),
+    title: Text(
+            lang!.infoHeadLine),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const <Widget>[
+      children: <Widget>[
         Text(
-            "Her kommer beskrivelsen av spillet å være. Plis gjør boksen litt finere a, din tøs"),
+            lang.info),
       ],
     ),
     actions: <Widget>[
@@ -18,7 +22,7 @@ Widget pop_up_dialog(BuildContext context) {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        child: const Text('Lukk'),
+        child: Text(lang.closeButton),
       ),
     ],
   );

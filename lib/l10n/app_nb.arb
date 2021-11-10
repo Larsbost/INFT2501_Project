@@ -1,3 +1,7 @@
 {
-  "helloWorld": "Hallo verden!"
+  "info": "Spillet heter Hangman. Mer info kommer etterhvert",
+  "closeButton": "Lukk",
+  "infoHeadLine": "Hvodan spille?",
+  "playButton": "Start Spillet!",
+  "infoButton": "Informasjon"
 }

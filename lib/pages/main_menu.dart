@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inft2501_prosjekt/pages/hangman_game.dart';
 import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class MainMenu extends StatefulWidget {
   @override
@@ -9,10 +11,12 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
+
   final List<bool> _selections = List.generate(2, (_) => false);
 
   @override
   Widget build(BuildContext context) {
+    var lang = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.blueGrey,
       appBar: AppBar(
@@ -31,7 +35,7 @@ class _MainMenuState extends State<MainMenu> {
               image: AssetImage('assets/hangman_logo.png'),
             ),
             TextButton.icon(
-              label: const Text('Start Spillet!'),
+              label: Text(lang!.playButton),
               icon: const Icon(Icons.accessibility_new),
               style: TextButton.styleFrom(
                   primary: Colors.black45,
@@ -54,7 +58,7 @@ class _MainMenuState extends State<MainMenu> {
                   });
                 }),
             TextButton.icon(
-              label: const Text('Informasjon'),
+              label: Text(lang.infoButton),
               icon: const Icon(Icons.info),
               style: TextButton.styleFrom(
                   primary: Colors.black45,
