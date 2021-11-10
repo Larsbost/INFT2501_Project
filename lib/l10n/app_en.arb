@@ -22,5 +22,10 @@
   "infoButton": "Information",
   "@infoButton": {
     "description": "Info about the game"
+  },
+
+  "alphabet": "abcdefghijklmnopqrstuvwxyz",
+  "@alphabet": {
+    "description": "It's the alphabet"
   }
 }

@@ -3,5 +3,6 @@
   "closeButton": "Lukk",
   "infoHeadLine": "Hvodan spille?",
   "playButton": "Start Spillet!",
-  "infoButton": "Informasjon"
+  "infoButton": "Informasjon",
+  "alphabet": "abcdefghijklmnopqrstuvwxyzæøå"
 }
