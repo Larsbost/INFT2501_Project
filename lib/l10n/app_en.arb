@@ -24,8 +24,17 @@
     "description": "Info about the game"
   },
 
-  "alphabet": "abcdefghijklmnopqrstuvwxyz",
+  "alphabet": "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z",
   "@alphabet": {
     "description": "It's the alphabet"
+  },
+
+  "words": "house,party,mouse,cat,color,three,cheese,weekly,hurt,bottle,quadruple,foreach,universe",
+  "@word": {
+  "description": "All the words that can pop in the game"
+ },
+  "mainMenu": "Main Menu",
+  "@mainMenu": {
+    "description": "Go back to main menu"
   }
 }
