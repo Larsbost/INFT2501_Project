@@ -22,9 +22,12 @@ class _WinState extends State<Win> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Image(
+         const Padding(
+        padding: EdgeInsets.all(30),
+            child: Image(
               image: AssetImage('assets/win.png'),
             ),
+        ),
             const SizedBox(height: 50.0),
             TextButton.icon(
               label: Text(lang!.mainMenu),

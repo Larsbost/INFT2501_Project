@@ -22,8 +22,11 @@ class _LooseState extends State<Loose> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Image(
-              image: AssetImage('assets/loose.png'),
+            const Padding(
+              padding: EdgeInsets.all(30),
+              child: Image(
+                image: AssetImage('assets/loose.png'),
+              ),
             ),
             const SizedBox(height: 50.0),
             TextButton.icon(
