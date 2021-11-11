@@ -66,6 +66,17 @@ flutter:
   assets:
     - assets/hangman_logo.png
     - assets/hangman_txt.png
+    - assets/win.png
+    - assets/loose.png
+    - assets/hangman_lives/0.png
+    - assets/hangman_lives/1.png
+    - assets/hangman_lives/2.png
+    - assets/hangman_lives/3.png
+    - assets/hangman_lives/4.png
+    - assets/hangman_lives/5.png
+    - assets/hangman_lives/6.png
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

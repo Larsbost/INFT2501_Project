@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:inft2501_prosjekt/pages/win.dart';
 import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
-import 'package:inft2501_prosjekt/pages/main_menu.dart';
+import 'main_menu.dart';
 import '../models/game.dart';
 import '../models/alphabet.dart';
 import '../widgets/click_on_char_button.dart';
@@ -9,6 +10,7 @@ import '../widgets/guess_char.dart';
 import '../models/guessed_char.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "dart:math";
+import 'loose.dart';
 
 class Hangman extends StatefulWidget {
   const Hangman({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class Hangman extends StatefulWidget {
 
 class _HangmanState extends State<Hangman> {
 
-  final Game game = Game(lives: 10, word: "Hangman");
+  final Game game = Game(lives: 6, word: "Hangman");
   var guessedLetters = <GuessedChar>[];
   var clickAlphabets = <Alphabet>[];
 
@@ -43,7 +45,7 @@ class _HangmanState extends State<Hangman> {
               padding: const EdgeInsets.all(20.0),
               height: deviceHeight * 0.2,
               width: double.infinity,
-              color: Colors.blueGrey[700],
+              color: Colors.blueGrey,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +55,7 @@ class _HangmanState extends State<Hangman> {
                     flex: 3,
                     child: Center(
                       child: Image.asset(
-                        'assets/images/${10 - game.lives}.png',
+                        'assets/hangman_lives/${6 - game.lives}.png',
                       ),
                     ),
                   ),
@@ -148,11 +150,11 @@ class _HangmanState extends State<Hangman> {
           ],
         ),
       ),
-
     );
   }
 
-  //----------------| Get random word or word from user typing|---------------------
+
+
   Future getWord(BuildContext context) async {
     var lang = AppLocalizations.of(context);
     final _random = Random();
@@ -172,14 +174,6 @@ class _HangmanState extends State<Hangman> {
           guessedLetters.add(GuessedChar(game.word[i], false));
         }
 
-        //if word contains space mark it as guessed
-        for (var element in guessedLetters) {
-          element.char == " "
-              ? element.isGuessed = true
-              : element.isGuessed = false;
-        }
-        //getAlphabet();
-
         setState(() =>
             alphabet.forEach(
                     (letter) =>
@@ -190,14 +184,6 @@ class _HangmanState extends State<Hangman> {
     } catch (e) {}
   }
 
-
-  //----------------| get alphabet and setup it into list |---------------------
-/*  void getAlphabet() =>
-      setState(() =>
-          Alphabet.alphabet.forEach(
-      (letter) => clickAlphabets.add(Alphabet(
-          letter.toUpperCase(), false, this.game.word.contains(letter), ))));*/
-
   @override
   void initState() {
     super.initState();
@@ -206,7 +192,6 @@ class _HangmanState extends State<Hangman> {
     });
   }
 
-  //---------------------| handle alphabet letter click |------------------------------
   void alphabetClickOnCharButton(String title) {
     bool isContains = false;
     setState(() {
@@ -229,37 +214,14 @@ class _HangmanState extends State<Hangman> {
 
       //game lose
       if (game.lives <= 0) {
-        //lose();
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const Loose()));
       }
       //win the game
       if (guessedLetters
           .where((element) => element.isGuessed == false)
           .isEmpty) {
-        //win();
+        Navigator.push(context,MaterialPageRoute(builder: (context) => const Win()));
       }
     });
   }
-
-//====================================================================================
-/*
-
-  //lose game
-  void lose() =>
-      Navigator.pushReplacementNamed(context, LoseScreen.routeName, arguments: {
-        "score": this.game.score,
-        "word": (ModalRoute.of(context).settings.arguments as String),
-        "guessedWord": game.word
-      });
-
-  //win game
-  void win() {
-    checkHighScore();
-    Navigator.pushReplacementNamed(context, WinScreen.routeName, arguments: {
-      "score": this.game.score,
-      "word": (ModalRoute.of(context).settings.arguments as String),
-      "guessedWord": game.word
-    });
-  }
-*/
-
 }
