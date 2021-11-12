@@ -14,7 +14,10 @@ class _LooseState extends State<Loose> {
   @override
   Widget build(BuildContext context) {
     var lang = AppLocalizations.of(context);
-
+    String img = "tapte";
+    if(lang!.infoButton == "Information"){
+      img = "loose";
+    }
     return Scaffold(
       backgroundColor: Colors.blueGrey,
       body: Center(
@@ -22,15 +25,14 @@ class _LooseState extends State<Loose> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
+             Padding(
               padding: EdgeInsets.all(30),
-              child: Image(
-                image: AssetImage('assets/loose.png'),
-              ),
+              child: Image.asset('assets/$img.png'),
+
             ),
             const SizedBox(height: 50.0),
             TextButton.icon(
-              label: Text(lang!.mainMenu),
+              label: Text(lang.mainMenu),
               icon: const Icon(Icons.album_outlined),
               style: TextButton.styleFrom(
                   primary: Colors.black45,

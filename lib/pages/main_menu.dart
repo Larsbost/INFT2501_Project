@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:inft2501_prosjekt/generated/l10n.dart';
 import 'package:inft2501_prosjekt/pages/hangman_game.dart';
 import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -8,26 +9,19 @@ class MainMenu extends StatefulWidget {
   @override
   State<MainMenu> createState() => _MainMenuState();
 
-  static _MainMenuState? of(BuildContext context) => context.findAncestorStateOfType<_MainMenuState>();
 
 }
 
 class _MainMenuState extends State<MainMenu> {
-
-  late Locale _locale;
-
-  void setLocale(Locale value) {
-    setState(() {
-      _locale = value;
-    });
-  }
-
 
 
   late List<bool> isSelected;
 
   @override
   Widget build(BuildContext context) {
+
+    final locale = Localizations.localeOf(context);
+
     var lang = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -98,11 +92,6 @@ class _MainMenuState extends State<MainMenu> {
                 setState(() {
                   for (int i = 0; i < isSelected.length; i++) {
                     isSelected[i] = i == index;
-                  }
-                  if(index == 0){
-                    MainMenu.of(context)!.setLocale(const Locale.fromSubtags(languageCode: 'en'));
-                  } else {
-                    MainMenu.of(context)!.setLocale(const Locale.fromSubtags(languageCode: 'nb'));
                   }
                 });
               },
