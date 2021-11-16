@@ -26,7 +26,7 @@ class _LooseState extends State<Loose> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
              Padding(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               child: Image.asset('assets/$img.png'),
 
             ),

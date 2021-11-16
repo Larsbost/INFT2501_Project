@@ -150,7 +150,7 @@ class _HangmanState extends State<Hangman> {
   }
 
 
-  
+
   void charButtonClick(String buttonChar) {
     bool isContains = false;
 

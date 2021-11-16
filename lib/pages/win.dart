@@ -26,7 +26,7 @@ class _WinState extends State<Win> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
              Padding(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               child: Image.asset('assets/$img.png'),
             ),
             const SizedBox(height: 50.0),

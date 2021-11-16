@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inft2501_prosjekt/pages/main_menu.dart';
-import 'package:inft2501_prosjekt/pages/hangman_game.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -28,7 +27,7 @@ class Hangman extends StatelessWidget {
       initialRoute: "/home",
       routes: {
         '/home' : (context) => MainMenu(),
-        '/hangman' : (context) =>  Hangman()
+        '/hangman' : (context) =>  const Hangman()
       },
     );
   }
