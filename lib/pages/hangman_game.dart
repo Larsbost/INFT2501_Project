@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:inft2501_prosjekt/pages/win.dart';
 import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
-import 'main_menu.dart';
-import '../models/game.dart';
-import '../models/alphabet.dart';
-import '../widgets/click_on_char_button.dart';
-import '../widgets/guess_char.dart';
-import '../models/guessed_char.dart';
+import '../models/game_model.dart';
+import '../models/char_model.dart';
+import '../widgets/char_keyboard.dart';
+import '../widgets/show_correct_guessed_char.dart';
+import '../models/guessed_char_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import "dart:math";
 import 'loose.dart';
@@ -19,22 +18,14 @@ class Hangman extends StatefulWidget {
   State<Hangman> createState() => _HangmanState();
 }
 
-
 class _HangmanState extends State<Hangman> {
-
-  final Game game = Game(lives: 6, word: "Hangman");
-  var guessedLetters = <GuessedChar>[];
-  var clickAlphabets = <Alphabet>[];
+  final Game game = Game();
+  var guessedChars = <GuessedChar>[];
+  var alphabets = <Character>[];
 
   @override
   Widget build(BuildContext context) {
     var lang = AppLocalizations.of(context);
-
-    final theme = Theme.of(context);
-    final deviceHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
 
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -42,75 +33,49 @@ class _HangmanState extends State<Hangman> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(20.0),
-              height: deviceHeight * 0.2,
-              width: double.infinity,
               color: Colors.blueGrey,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(width: 25.0,),
+                  const SizedBox(width: 25),
                   Expanded(
-                    flex: 3,
                     child: Center(
                       child: Image.asset(
                         'assets/hangman_lives/${6 - game.lives}.png',
                       ),
                     ),
                   ),
-                  const SizedBox(width: 25.0,),
+                  const SizedBox(width: 25),
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(30, 10, 10, 0),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-              ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 2.0,
-            ),
-            SizedBox(
-              height: deviceHeight * 0.1,
-            ),
+            const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Wrap(
                 children: [
-                  //setup word in guessLetter widget
-                  ...guessedLetters
-                      .map((guessedChar) =>
-                      GuessChar(
-                          guessedChar.char,
-                          guessedChar.isGuessed))
+                  ...guessedChars
+                      .map((guessedChar) => CorrectGuessedChar(
+                          guessedChar.char, guessedChar.isGuessed))
                       .toList()
                 ],
               ),
             ),
-            SizedBox(
-              height: deviceHeight * 0.1,
-            ),
+            const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Wrap(
                 alignment: WrapAlignment.start,
                 children: [
-                  //show alphabet
-                  ...clickAlphabets
-                      .map((letter) =>
-                      ClickOnCharButton(
-                          letter.char,
-                          letter.isChoose,
-                          letter.isInWord,
-                          alphabetClickOnCharButton))
+                  ...alphabets
+                      .map((char) => CharKeyboard(char.char, char.isChoose,
+                          char.isInWord, charButtonClick))
                       .toList()
                 ],
               ),
             ),
-            const SizedBox(height: 45.0,),
+            const SizedBox(height: 45),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +96,9 @@ class _HangmanState extends State<Hangman> {
                     );
                   },
                 ),
-                const SizedBox(width: 25.0,),
+                const SizedBox(
+                  width: 25,
+                ),
                 TextButton.icon(
                   label: Text(lang.mainMenu),
                   icon: const Icon(Icons.album_outlined),
@@ -153,37 +120,6 @@ class _HangmanState extends State<Hangman> {
     );
   }
 
-
-
-  Future getWord(BuildContext context) async {
-    var lang = AppLocalizations.of(context);
-    final _random = Random();
-
-    String letters = lang!.alphabet;
-    List<String> alphabet = letters.split(",");
-    String word = lang.words;
-    List<String> words = word.split(",");
-
-
-    try {
-      String routeWord = words[_random.nextInt(words.length)];
-      setState(() => game.word = routeWord);
-
-      setState(() {
-        for (int i = 0; i < game.word.length; i++) {
-          guessedLetters.add(GuessedChar(game.word[i], false));
-        }
-
-        setState(() =>
-            alphabet.forEach(
-                    (letter) =>
-                    clickAlphabets.add(Alphabet(
-                        letter.toUpperCase(), false,
-                        game.word.contains(letter)))));
-      });
-    } catch (e) {}
-  }
-
   @override
   void initState() {
     super.initState();
@@ -192,35 +128,55 @@ class _HangmanState extends State<Hangman> {
     });
   }
 
-  void alphabetClickOnCharButton(String title) {
-    bool isContains = false;
+  void getWord(BuildContext context) {
+    var lang = AppLocalizations.of(context);
+    final _random = Random();
+
+    String chars = lang!.alphabet;
+    List<String> alphabet = chars.split(",");
+    String word = lang.words;
+    List<String> words = word.split(",");
+
+    String randomWord = words[_random.nextInt(words.length)];
+    setState(() => game.word = randomWord);
+
     setState(() {
-      //set letter as guessed
       for (int i = 0; i < game.word.length; i++) {
-        if (game.word[i].toUpperCase() == title) {
-          guessedLetters[i].isGuessed = true;
+        guessedChars.add(GuessedChar(game.word[i], false));
+      }
+      setState(() => alphabet.forEach((char) => alphabets.add(
+          Character(char.toUpperCase(), false, game.word.contains(char)))));
+    });
+  }
+
+
+  
+  void charButtonClick(String buttonChar) {
+    bool isContains = false;
+
+    setState(() {
+      for (int i = 0; i < game.word.length; i++) {
+        if (game.word[i].toUpperCase() == buttonChar) {
+          guessedChars[i].isGuessed = true;
           isContains = true;
         }
       }
-      clickAlphabets
-          .where((letter) => letter.char == title)
+
+      alphabets
+          .where((letter) => letter.char == buttonChar)
           .toList()[0]
           .isChoose = true;
 
-      //bad letter click - not contains in the word
       if (!isContains) {
         game.lives--;
       }
-
-      //game lose
       if (game.lives <= 0) {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const Loose()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Loose()));
       }
-      //win the game
-      if (guessedLetters
-          .where((element) => element.isGuessed == false)
-          .isEmpty) {
-        Navigator.push(context,MaterialPageRoute(builder: (context) => const Win()));
+      if (guessedChars.where((element) => element.isGuessed == false).isEmpty) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const Win()));
       }
     });
   }

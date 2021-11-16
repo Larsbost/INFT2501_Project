@@ -31,7 +31,7 @@ class _WinState extends State<Win> {
             ),
             const SizedBox(height: 50.0),
             TextButton.icon(
-              label: Text(lang!.mainMenu),
+              label: Text(lang.mainMenu),
               icon: const Icon(Icons.album_outlined),
               style: TextButton.styleFrom(
                   primary: Colors.black45,

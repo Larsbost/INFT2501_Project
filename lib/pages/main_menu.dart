@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:inft2501_prosjekt/generated/l10n.dart';
 import 'package:inft2501_prosjekt/pages/hangman_game.dart';
 import 'package:inft2501_prosjekt/widgets/pop_up_dialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,13 +13,8 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
 
-
-  late List<bool> isSelected;
-
   @override
   Widget build(BuildContext context) {
-
-    final locale = Localizations.localeOf(context);
 
     var lang = AppLocalizations.of(context);
     return Scaffold(
@@ -72,40 +66,9 @@ class _MainMenuState extends State<MainMenu> {
               },
             ),
             const SizedBox(height: 20.0),
-            ToggleButtons(
-              children: const <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'EN',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'NB',
-                  ),
-                ),
-              ],
-              // logic for button selection below
-              onPressed: (int index) {
-                setState(() {
-                  for (int i = 0; i < isSelected.length; i++) {
-                    isSelected[i] = i == index;
-                  }
-                });
-              },
-              isSelected: isSelected,
-            ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    isSelected = [true, false];
-    super.initState();
   }
 }

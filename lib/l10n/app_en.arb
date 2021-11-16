@@ -1,5 +1,5 @@
 {
-  "info": "The game is called hangman. I cant be asked to write more",
+  "info": "In Hangman you're supposed to guess a random word before you man gets hanged! You have six lives before you loose, so guess your letters wisely!",
   "@info": {
     "description": "Info about the game"
   },
@@ -29,7 +29,7 @@
     "description": "It's the alphabet"
   },
 
-  "words": "house,party,mouse,cat,color,three,cheese,weekly,hurt,bottle,quadruple,foreach,universe",
+  "words": "house,party,mouse,cat,color,three,cheese,weekly,hurt,bottle,foreach,horse,map,sad",
   "@word": {
   "description": "All the words that can pop in the game"
  },
