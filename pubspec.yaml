@@ -68,6 +68,8 @@ flutter:
     - assets/hangman_txt.png
     - assets/win.png
     - assets/loose.png
+    - assets/tapte.png
+    - assets/vant.png
     - assets/hangman_lives/0.png
     - assets/hangman_lives/1.png
     - assets/hangman_lives/2.png

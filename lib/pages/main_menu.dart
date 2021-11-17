@@ -8,26 +8,14 @@ class MainMenu extends StatefulWidget {
   @override
   State<MainMenu> createState() => _MainMenuState();
 
-  static _MainMenuState? of(BuildContext context) => context.findAncestorStateOfType<_MainMenuState>();
 
 }
 
 class _MainMenuState extends State<MainMenu> {
 
-  late Locale _locale;
-
-  void setLocale(Locale value) {
-    setState(() {
-      _locale = value;
-    });
-  }
-
-
-
-  late List<bool> isSelected;
-
   @override
   Widget build(BuildContext context) {
+
     var lang = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.blueGrey,
@@ -78,45 +66,9 @@ class _MainMenuState extends State<MainMenu> {
               },
             ),
             const SizedBox(height: 20.0),
-            ToggleButtons(
-              children: const <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'EN',
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'NB',
-                  ),
-                ),
-              ],
-              // logic for button selection below
-              onPressed: (int index) {
-                setState(() {
-                  for (int i = 0; i < isSelected.length; i++) {
-                    isSelected[i] = i == index;
-                  }
-                  if(index == 0){
-                    MainMenu.of(context)!.setLocale(const Locale.fromSubtags(languageCode: 'en'));
-                  } else {
-                    MainMenu.of(context)!.setLocale(const Locale.fromSubtags(languageCode: 'nb'));
-                  }
-                });
-              },
-              isSelected: isSelected,
-            ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    isSelected = [true, false];
-    super.initState();
   }
 }

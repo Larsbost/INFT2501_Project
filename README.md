@@ -1,16 +1,17 @@
-# inft2501_prosjekt
+## inft2501_prosjekt
 
 End off semester project for the class INFT2501
 
-## Getting Started
+# Launch the project
 
-This project is a starting point for a Flutter application.
+You need to have Flutter installed on you computer.
+For Windows use: 
+```
+git clone https://github.com/flutter/flutter.git -b stable
+```
+If you're using another OS, or want to dwonload the .zip you can find it [here](https://docs.flutter.dev/get-started/install)
 
-A few resources to get you started if this is your first Flutter project:
+You may also need to add Flutter to your environment path.
+  After that just boot up an Android emulator and run main.dart.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

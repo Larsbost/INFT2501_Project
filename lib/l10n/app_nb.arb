@@ -1,10 +1,10 @@
 {
-  "info": "Spillet heter Hangman. Mer info kommer etterhvert",
+  "info": "I Hangman skal du gjette et tilfeldig ord før mannen din blir hengt! Du har seks liv, så tenk nøye om før du gjetter en bokstav!",
   "closeButton": "Lukk",
   "infoHeadLine": "Hvodan spille?",
   "playButton": "Start Spillet!",
   "infoButton": "Informasjon",
   "alphabet": "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,æ,ø,å",
-  "words": "huset,fjellvegg,tastatur,potetgull,svømming,huske,ape,maskin,læring,pave",
+  "words": "huset,vegg,hage,gull,kø,huske,ape,maskin,læring,pave",
   "mainMenu": "Hovedmeny"
 }
